@@ -16,7 +16,7 @@ class Reader
         $reader = new Reader();
         
         if(!$location)
-            $reader->location = __DIR__ . "/../data/";
+            $reader->location = "data/in/";
         else
             $reader->location = $location;
             

@@ -6,6 +6,8 @@ class Matcher
     
     protected static $instance = null;
     
+    const SCORES_FILE = 'data/out/similarity_scores.csv';
+    
     public static function instance()
     {
         if(!self::$instance) {
@@ -37,6 +39,7 @@ class Matcher
             }
         }
         
+        file_put_contents(self::SCORES_FILE, $maxScore . "\n", FILE_APPEND);
         return $sink;
     }
 }

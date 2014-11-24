@@ -16,5 +16,12 @@ class Profile extends Base
         $this->name = $json->name;
     }
     
+    public function toArray()
+    {
+        return array(
+            'name' => $this->name,
+            'preferences' => $this->preferences
+        );
+    }
     
 }

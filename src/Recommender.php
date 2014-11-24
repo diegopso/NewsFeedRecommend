@@ -4,6 +4,7 @@ class Recommender
 {
     protected $source;
     protected $sink;
+    protected $recommendations;
     
     public function __construct(Profile $source)
     {
@@ -14,6 +15,16 @@ class Recommender
     {
         $matcher = Matcher::instance();
         $this->sink = $matcher->match($this->source);
-        return array_diff($this->sink->preferences, $this->source->preferences);
+        $this->recommendations = array_diff($this->sink->preferences, $this->source->preferences);
+        return $this->recommendations;
+    }
+    
+    public function toArray()
+    {
+        return array(
+                'source' => $this->source->toArray(),
+                'sink' => $this->sink->toArray(),
+                'recommendations' => $this->recommendations
+            );
     }
 }

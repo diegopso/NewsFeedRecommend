@@ -2,9 +2,14 @@
 
 require_once 'autoload.php';
 
-$location = __DIR__ . '/data/1.json';
-$sampleProfile = new Profile($location);
+chdir(__DIR__);
 
-$recommender = new Recommender($sampleProfile);
+file_put_contents(Matcher::SCORES_FILE, '');
 
-exit(var_dump($recommender->recommend()));
+for ($i = 1; $i <= 10; $i++) {
+    $location = 'data/in/'. $i .'.json';
+    $sampleProfile = new Profile($location);
+    $recommender = new Recommender($sampleProfile);
+    $recommender->recommend();
+    file_put_contents('data/out/recomendation_to_' . $i . '.json', json_encode($recommender->toArray()));
+}
